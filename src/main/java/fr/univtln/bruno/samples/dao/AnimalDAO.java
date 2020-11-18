@@ -14,4 +14,9 @@ public class AnimalDAO extends AbstractDAO<Animal> {
         return getEntityManager().createNamedQuery("animal.AllAninmal")
                 .getResultList();
     }
+
+    @Override
+    public Class<Animal> getmytype() {
+        return Animal.class;
+    }
 }

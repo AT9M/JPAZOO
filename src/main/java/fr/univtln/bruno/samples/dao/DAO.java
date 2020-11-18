@@ -9,6 +9,7 @@ import javax.persistence.EntityTransaction;
 public interface DAO<T extends SimpleEntity> extends AutoCloseable {
 
     EntityManager getEntityManager();
+    Class <T>  getmytype();
 
     default void persist(T E) {
         getEntityManager().persist(E);
@@ -26,9 +27,7 @@ public interface DAO<T extends SimpleEntity> extends AutoCloseable {
         getEntityManager().clear();
     }
 
-    default Animal find(long id) {
-        return getEntityManager().find(Animal.class, id);
-    }
+    default T find(long id) { return getEntityManager().find(getmytype(), id); }
 
     @Override
     default void close() {

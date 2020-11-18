@@ -2,15 +2,13 @@ package fr.univtln.bruno.samples.animals;
 
 
 import fr.univtln.bruno.samples.entity.SimpleEntity;
+import fr.univtln.bruno.samples.annotation.MyAnnotation;
 import fr.univtln.bruno.samples.structures.Zoo;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -30,7 +28,7 @@ import java.util.List;
         @NamedQuery(name = "animal.FindAnimal",query = "select animal from Animal animal where animal.id=:id"),
         @NamedQuery(name = "animal.Findbyzoo",query = "select animal from Animal animal where animal.zoo=:zoo")
 })
-
+@MyAnnotation(name = "Animal")
 @SuperBuilder
 public class Animal implements SimpleEntity {
 

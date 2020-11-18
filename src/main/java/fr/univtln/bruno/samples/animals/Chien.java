@@ -1,6 +1,7 @@
 package fr.univtln.bruno.samples.animals;
 
 import fr.univtln.bruno.samples.maladies.Pathologie;
+import fr.univtln.bruno.samples.annotation.MyAnnotation;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,6 @@ import org.eclipse.persistence.annotations.CascadeOnDelete;
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -21,6 +21,7 @@ import java.util.List;
 @CascadeOnDelete
 
 @NamedQuery(name="chien.DELETE", query = "SELECT chien FROM  Chien chien  where chien.name=:name")
+@MyAnnotation(name = "Chien")
 @SuperBuilder
 public class Chien extends Animal {
     @Min(1)

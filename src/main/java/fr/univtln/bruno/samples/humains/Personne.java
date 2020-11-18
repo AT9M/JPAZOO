@@ -1,8 +1,8 @@
 package fr.univtln.bruno.samples.humains;
 
 import fr.univtln.bruno.samples.entity.SimpleEntity;
+import fr.univtln.bruno.samples.annotation.MyAnnotation;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -19,6 +19,7 @@ import javax.persistence.*;
 @CascadeOnDelete
 @NoArgsConstructor
 @AllArgsConstructor
+@MyAnnotation(name = "Person")
 @SuperBuilder
 public class Personne implements SimpleEntity {
 

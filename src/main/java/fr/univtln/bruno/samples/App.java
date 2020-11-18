@@ -4,13 +4,15 @@ import fr.univtln.bruno.samples.animals.Aigle;
 import fr.univtln.bruno.samples.animals.Animal;
 import fr.univtln.bruno.samples.animals.Chien;
 import fr.univtln.bruno.samples.animals.Vache;
+import fr.univtln.bruno.samples.annotation.MyAnnotation;
 import fr.univtln.bruno.samples.dao.AnimalDAO;
 import fr.univtln.bruno.samples.dao.HumainDAO;
 import fr.univtln.bruno.samples.dao.StructureDAO;
-import fr.univtln.bruno.samples.entity.SimpleEntity;
+import fr.univtln.bruno.samples.humains.Personne;
 import fr.univtln.bruno.samples.humains.ZooKeeper;
 import fr.univtln.bruno.samples.maladies.Pathologie;
 import fr.univtln.bruno.samples.structures.Zoo;
+
 
 
 import javax.persistence.EntityTransaction;
@@ -18,11 +20,8 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
-import java.util.Set;
+import java.lang.annotation.Annotation;
+import java.util.*;
 
 /**
  * Hello world!
@@ -40,7 +39,7 @@ public class App
 
     public static void main( String[] args )
     {
-
+        ///CREATE DATA///
         Pathologie pathos1 = Pathologie.builder().name("Cancer").build();
         Pathologie pathos2 = Pathologie.builder().name("Rage").build();
         List<Pathologie> maladie =new ArrayList<>();
@@ -65,27 +64,43 @@ public class App
 
         Aigle aigle = Aigle.builder().name("America").age(5).zoo(zoo).build();
 
-        Chien chien = Chien.builder().name("Hector").age(7).zoo(zoo).build();
+        Chien chien = Chien.builder().name("Hector").age(7).Pathos(maladie).zoo(zoo).build();
 
         Vache vache = Vache.builder().name("Germaine").age(55).zoo(zoo).build();
 
 
-        System.out.println(aigle.getAge());
+        ///ANNOTATION///
+        Class zooClass= zoo.getClass();
+        MyAnnotation zooClassAnnotation = (MyAnnotation) zooClass.getAnnotation(MyAnnotation.class);
+        System.out.println(zooClassAnnotation.name());
 
+        Class animalClass= animal.getClass();
+        MyAnnotation AnimalANnt = (MyAnnotation) animalClass.getAnnotation(MyAnnotation.class);
+        System.out.println(AnimalANnt.name());
 
+        ////VALIDATION////
         Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
         List<Animal> entities = new ArrayList<>();
         entities.add(aigle);entities.add(vache);
+        entities.add(chien);entities.add(animal);
+        entities.add(animal1);
 
         for (Animal a:entities) {
             Set<ConstraintViolation<Animal>> v = validator.validate(a);
             System.out.println(v);
         }
 
+        List<Personne> entities2 = new ArrayList<>();
+        entities2.add(zooKeeper1);entities2.add(zooKeeper2);
+
+        for (Personne p:entities2) {
+            Set<ConstraintViolation<Personne>> v = validator.validate(p);
+            System.out.println(v);
+        }
 
 
-
+        ///DATABASE///
         try (HumainDAO humainDAO = HumainDAO.of()) {
 
             EntityTransaction transaction = humainDAO.getTransaction();

@@ -2,6 +2,7 @@ package fr.univtln.bruno.samples.structures;
 
 import fr.univtln.bruno.samples.entity.SimpleEntity;
 import fr.univtln.bruno.samples.humains.ZooKeeper;
+import fr.univtln.bruno.samples.annotation.MyAnnotation;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,6 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @CascadeOnDelete
+@MyAnnotation(name = "Zoo")
 public class Zoo implements SimpleEntity {
 
     @Id

@@ -2,6 +2,7 @@ package fr.univtln.bruno.samples.animals;
 
 import fr.univtln.bruno.samples.entity.SimpleEntity;
 import fr.univtln.bruno.samples.maladies.Pathologie;
+import fr.univtln.bruno.samples.annotation.MyAnnotation;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,6 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -24,6 +24,7 @@ import java.util.List;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
+@MyAnnotation(name = "Aigle")
 public class Aigle extends Animal implements SimpleEntity {
 
     @Min(1)

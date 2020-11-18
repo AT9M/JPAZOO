@@ -14,4 +14,8 @@ import java.util.List;
 public class HumainDAO extends AbstractDAO<Personne>{
 
 
+    @Override
+    public Class<Personne> getmytype() {
+        return Personne.class;
+    }
 }

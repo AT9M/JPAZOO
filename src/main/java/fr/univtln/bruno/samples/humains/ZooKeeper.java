@@ -1,6 +1,7 @@
 package fr.univtln.bruno.samples.humains;
 
 import fr.univtln.bruno.samples.entity.SimpleEntity;
+import fr.univtln.bruno.samples.annotation.MyAnnotation;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,7 @@ import javax.validation.constraints.Size;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@MyAnnotation(name = "Zookeeper")
 @SuperBuilder
 public class ZooKeeper extends Personne implements SimpleEntity {
     @Id
